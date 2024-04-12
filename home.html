@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+
+    <link rel="stylesheet" href="home.css">
+    <title>Panel de Registro de notas</title>
+</head>
+
+<body>
+
+
+    <!-- Dashboard -->
+    <div class="d-flex flex-column flex-lg-row h-lg-full bg-surface-secondary">
+        <!-- Vertical Navbar -->
+        <nav class="navbar show navbar-vertical h-lg-screen navbar-expand-lg px-0 py-3 navbar-light bg-white border-bottom border-bottom-lg-0 border-end-lg"
+            id="navbarVertical">
+            <div class="container-fluid">
+                <!-- Toggler -->
+                <button class="navbar-toggler ms-n2" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#sidebarCollapse" aria-controls="sidebarCollapse" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <!-- Brand -->
+                <a class="navbar-brand py-lg-2 mb-lg-5 px-lg-6 me-0" href="#">
+                    <h5 class="text">Registro de Notas</h5>
+                </a>
+                <!-- User menu (mobile) -->
+                <div class="d-flex d-lg-none align-items-center">
+
+
+
+                    <!-- Dropdown -->
+                    <div class="dropdown">
+                        <!-- Toggle -->
+                        <a href="#" id="sidebarAvatar" role="button" data-bs-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">
+                            <div class="avatar-parent-child">
+                                <img alt="Image Placeholder" src="img/logo.png" class="avatar avatar- rounded-circle">
+                                <span class="avatar-child avatar-badge bg-success"></span>
+                            </div>
+                        </a>
+                        <!-- Menu -->
+                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="sidebarAvatar">
+                            <!-- Agrega este botón de alternancia en tu HTML -->
+                            <!-- Agrega este botón de alternancia en tu HTML -->
+                            <button id="toggle-theme-btn">Cambiar Tema</button>
+
+
+                            <a href="#" class="dropdown-item">Logout</a>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- Collapse -->
+                <div class="collapse navbar-collapse" id="sidebarCollapse">
+                    <!-- Navigation -->
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <i class="bi bi-house"></i> Dashboard
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" onclick="reportes()">
+                                <i class="bi bi-bar-chart"></i> Reportes
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" onclick="calendario()">
+                                <i class="bi bi-bookmarks"></i> Calendario
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <i class="bi bi-people"></i> Users
+                            </a>
+                        </li>
+                    </ul>
+
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <i class="bi bi-person-square"></i> Account
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" onclick="logout()">
+                                <i class="bi bi-box-arrow-left"></i> Logout
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- Main content -->
+        <div class="h-screen flex-grow-1 overflow-y-lg-auto">
+            <!-- Header -->
+            <header class="bg-surface-primary border-bottom pt-6">
+                <div class="container-fluid">
+                    <div class="mb-npx">
+                        <div class="row align-items-center">
+                            <div class="col-sm-6 col-12 mb-4 mb-sm-0">
+                                <!-- Title -->
+                                <h1 class="h2 mb-0 ls-tight">Registro De Notas</h1>
+
+
+                            </div>
+                            <!-- Actions -->
+                            <div class="col-sm-6 col-12 text-sm-end">
+                                <div class="mx-n1">
+
+                                    <div class="btn d-inline-flex btn-sm btn-primary mx-1">
+                                        <span class=" pe-2" onclick="openModal()">
+                                            <i class="bi bi-plus
+">
+                                                <h7>Registrar Nota</h7>
+                                            </i>
+                                        </span>
+                                        <div id="myModal" class="modal">
+                                            <div class="modal-content">
+                                                <span class="close" onclick="closeModal()">&times;</span>
+                                                <h2 class="textmodal">Registrar Nota</h2>
+
+                                                <label for="name">Maestro:</label>
+                                                <input type="text" id="name" name="name"
+                                                    placeholder="Nombre del maestro" required><br><br>
+                                                <label for="seccion">Alumno:</label>
+                                                <input type="select" id="seccion" name="seccion" placeholder="Nombre Alumno"
+                                                    required><br><br>
+                                                <label for="fecha">Fecha:</label>
+                                                <input type="date" id="fecha" name="fecha" required><br><br>
+                                                <label for="mujeres">Seccion:</label>
+                                                <input type="text" id="mujeres" name="mujeres" placeholder="seccion"
+                                                    required><br><br>
+                                                    <label for="varones">Materia:</label>
+                                                    <select id="varones" name="varones" required>
+                                                        <option value="">Seleccionar Materia</option>
+                                                        <option value="Matemáticas">Matemáticas</option>
+                                                        <option value="Ciencias">Ciencias</option>
+                                                        <option value="Historia">Historia</option>
+                                                        <option value="Lyl">Lyl</option>
+                                                        <option value="Fecha">Fisica</option>
+                                                        <option value="Quimica">Quimica</option>
+                                                        <option value="Ingles">Ingles</option>
+                                                        <option value="Sociales">Sociales</option>
+                                                        <option value="Educacion Fisica">Educacion Fisica</option>
+
+
+
+
+                                                        <!-- Agrega más opciones de materias aquí -->
+
+
+                                                    </select><br><br>
+                                                <label for="total">promedio:</label>
+                                                <input type="number" id="total" name="total" placeholder="promedio de la nota"
+                                                    required><br><br>
+                                                <button class="btnguardar" type="button"
+                                                    onclick="guardar()">Guardar</button>
+                                                <button class="btncerrar" type="button"
+                                                    onclick="closeModal()">Cerrar</button>
+
+
+
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- modal para editar -->
+                                    <div id="myModal2" class="modal">
+                                        <div class="modal-content">
+                                            <span class="close" onclick="closeModal2()">&times;</span>
+                                            <h2>Editar Asistencia</h2>
+                                            <input type="hidden" id="indexE">
+
+                                            <label for="name">Maestro:</label>
+                                            <input type="text" id="name1" name="name" placeholder="Nombre del maestro"
+                                                required><br><br>
+                                            <label for="seccion">Alumno:</label>
+                                            <input type="select" id="seccion1" name="seccion" placeholder="Nombre Alumno"
+                                                required><br><br>
+                                            <label for="fecha">Fecha:</label>
+                                            <input type="date" id="fecha1" name="fecha" required><br><br>
+                                            <label for="mujeres">Seccion:</label>
+                                            <input type="text" id="mujeres1" name="mujeres" placeholder="Seccion"
+                                                required><br><br>
+                                                <label for="varones">Materia:</label>
+                                                <select id="varones1" name="varones" required>
+                                                    <option value="">Seleccionar Materia</option>
+                                                    <option value="Matemáticas">Matemáticas</option>
+                                                    <option value="Ciencias">Ciencias</option>
+                                                    <option value="Historia">Historia</option>
+                                                    <option value="Lyl">Lyl</option>
+                                                    <option value="Fisica">Fisica</option>
+                                                    <option value="Quimica">Quimica</option>
+                                                    <option value="Ingles">Ingles</option>
+                                                    <option value="Sociales">Sociales</option>
+                                                    <option value="Educacion Fisica">Educacion Fisica</option>
+
+                                            <label for="total">promedio:</label>
+                                            <input type="number" id="total1" name="total" placeholder="promedio de la nota"
+                                                required><br><br>
+                                            <button class="btnguardar" type="button" onclick="Editar()">Guardar</button>
+                                            <button class="btncerrar" type="button"
+                                                onclick="closeModal2()">Cerrar</button>
+
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Nav -->
+                                <ul class="nav nav-tabs mt-4 overflow-x border-0">
+                                    <li class="nav-item ">
+
+                                </ul>
+                            </div>
+                        </div>
+            </header>
+            <!-- Main -->
+            <main class="py-6 bg-surface-secondary">
+                <div class="container-fluid">
+                    <!-- Card stats -->
+                    <div class="row g-6 mb-6">
+
+
+
+                        <div class="col-xl-3 col-sm-6 col-12">
+                            <div class="card shadow border-0">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div id="card-total-asistencias" class="col">
+                                            <span
+                                                class="h6 font-semibold  text-sm text-white d-block mb-2">Aprobados</span>
+                                            <span id="total-asistencias"
+                                                class="h3 font-bold mb-0">{{totalasistencias}}</span>
+                                        </div>
+                                        <div class="col-auto">
+                                            <div class="icon icon-shape bg-primary text-white text-lg rounded-circle">
+                                                <i class="bi bi-people"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mt-2 mb-0 text-sm">
+                                        <span class="badge badge-pill bg-soft-success text-success me-2">
+                                            <i class="bi bi-arrow-up me-1"></i>30%
+                                        </span>
+                                        <span class="text-nowrap text-xs text-muted"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-sm-6 col-12">
+                            <div class="card shadow border-0">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col">
+                                            <span
+                                                class="h6 font-semibold text-white text-sm d-block mb-2">Reprobados</span>
+                                            <span id="total-reprobados" class="h3 font-bold mb-0">{{totalreprobados}}</span>
+                                        </div>
+                                        <div class="col-auto">
+                                            <div class="icon icon-shape bg-info text-white text-lg rounded-circle">
+                                                <i class="bi bi-person"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mt-2 mb-0 text-sm">
+                                        <span class="badge badge-pill bg-soft-danger text-danger me-2">
+                                            <i class="bi bi-arrow-down me-1"></i>-5%
+                                        </span>
+                                        <span class="text-nowrap text-xs text-muted"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-sm-6 col-12">
+                            <div class="card shadow border-0">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col">
+                                            <span
+                                                class="h6 font-semibold text-white text-sm d-block mb-2">Pendientes</span>
+                                            <span id="total-pendientes" class="h3 font-bold mb-0">{{totalpendientes}}</span>
+                                        </div>
+                                        <div class="col-auto">
+                                            <div class="icon icon-shape bg-warning text-white text-lg rounded-circle">
+                                                <i class="bi bi-person-fill"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mt-2 mb-0 text-sm">
+                                        <span class="badge badge-pill bg-soft-success text-success me-2">
+                                            <i class="bi bi-arrow-up me-1"></i>10%
+                                        </span>
+                                        <span class="text-nowrap text-xs text-muted"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card shadow border-0 mb-7">
+                        <div class="card-header">
+                            <h5 class="mb-0">Registro de Notas</h5>
+
+
+                        </div>
+
+
+
+                    </div>
+                    <div class="table-responsive">
+                        <table id="myTable" class="table table-hover table-nowrap">
+                            <div id="teams"></div>
+                            <thead class="thead-light">
+
+                                <tr>
+                                    <th scope="col">Maestro</th>
+                                    <th scope="col">Alumno</th>
+                                    <th scope="col">Fecha</th>
+                                    <th scope="col">Seccion</th>
+                                 
+                                    <th scope="col">Materia</th>
+                                    <th scope="col">promedio</th>
+                                    <th scope="col" class="text-end">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tablaA">
+
+
+                            </tbody>
+
+
+                        </table>
+                    </div>
+                    <div class="card-footer border-0 py-5">
+                        <!-- crear pagination -->
+
+
+
+
+
+                    </div>
+                </div>
+        </div>
+        </main>
+    </div>
+    </div>
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <!-- Asegúrate de incluir jQuery y DataTables.js en tu HTML -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+
+
+
+
+    <script>
+
+
+
+
+
+
+
+        function openModal() {
+            document.getElementById("myModal").style.display = "block";
+        }
+
+        function closeModal() {
+            document.getElementById("myModal").style.display = "none";
+        }
+
+        function closeModal2() {
+            document.getElementById("myModal2").style.display = "none";
+        }
+        function openModal2() {
+            document.getElementById("myModal2").style.display = "block";
+        }
+
+        const guardar = () => {
+            let name = document.getElementById("name").value;
+            let seccion = document.getElementById("seccion").value;
+            let fecha = document.getElementById("fecha").value;
+            let mujeres = document.getElementById("mujeres").value;
+            let varones = document.getElementById("varones").value;
+            let total = document.getElementById("total").value;
+
+
+            let teams = JSON.parse(localStorage.getItem("notas")) || [];
+            teams.push({ name, seccion, fecha, mujeres, varones, total });
+            localStorage.setItem("notas", JSON.stringify(teams));
+            closeModal();
+            cargar();
+
+
+            // Actualizar la tarjeta con el total de mujeres y varones asistentes
+
+
+
+
+
+        }
+
+        const cargar = () => {
+            let teams = JSON.parse(localStorage.getItem("notas")) || [];
+            let tabla = document.getElementById("tablaA");
+            var html = "";
+            teams.map((team, index) => {
+                html += `
+                <tr>
+                    <td>${team.name}</td>
+                    <td>${team.seccion}</td>
+
+                    <td>${team.fecha}</td>
+                    <td>${team.mujeres}</td>
+                    <td>${team.varones}</td>
+                    <td>${team.total}</td>
+                    <td class="text-end">
+                        <button class="btn btn-sm btn-success me-2" onclick="reportes('${team.name}', '${team.seccion}', '${team.fecha}', '${team.mujeres}', '${team.varones}', '${team.total}')">
+                            <i class="bi bi-book"></i>
+                        <button class="btn btn-sm btn-secondary me-2" onclick="editar1('${team.name}', '${team.seccion}', '${team.fecha}', '${team.mujeres}', '${team.varones}', '${team.total}', ${index})">
+                            <i class="bi bi-pencil"></i>
+                        </button>
+                        <button class="btn btn-sm btn-danger" onclick="eliminar(${index})">
+                            <i class="bi bi-trash"></i>
+                        </button>
+
+
+                    </td>
+                </tr>
+            `;
+            });
+            tabla.innerHTML = html;
+
+
+
+        }
+        //calcular aprobados por el promedio de 60 a 100 y q se muestre en la tarjeta
+        const totalasistencias = () => {
+    let teams = JSON.parse(localStorage.getItem("notas")) || [];
+    let totalEstudiantes = teams.length; // Obtén el total de estudiantes
+    let aprobados = 0; // Inicializamos el contador de aprobados
+    teams.forEach(team => {
+        if (team.total >= 60 && team.total <= 100) { // Verificamos si el promedio está entre 60 y 100
+            aprobados++; // Incrementamos el contador si el promedio es válido
+        }
+    });
+    let promedioAprobados = (aprobados / totalEstudiantes) * 100; // Calcula el porcentaje de estudiantes aprobados
+    document.getElementById("total-asistencias").innerText = promedioAprobados.toFixed(2) + "%"; // Muestra el porcentaje de estudiantes aprobados en la tarjeta
+}
+
+// Llama a totalasistencias después de cargar los datos o realizar alguna acción que actualice las notas
+totalasistencias();
+
+const totalreprobados = () => {
+    let teams = JSON.parse(localStorage.getItem("notas")) || [];
+    let totalEstudiantes = teams.length; // Obtén el total de estudiantes
+    let reprobados = 0; // Inicializamos el contador de reprobados
+    teams.forEach(team => {
+        if (team.total >= 0 && team.total < 60) { // Verificamos si el promedio está entre 0 y 59
+            reprobados++; // Incrementamos el contador si el promedio es válido
+        }
+    });
+    let promedioReprobados = (reprobados / totalEstudiantes) * 100; // Calcula el porcentaje de estudiantes reprobados
+    document.getElementById("total-reprobados").innerText = promedioReprobados.toFixed(2) + "%"; // Muestra el porcentaje de estudiantes reprobados en la tarjeta
+}
+
+// Llama a totalreprobados después de cargar los datos o realizar alguna acción que actualice las notas
+totalreprobados();
+
+const totalpendientes = () => {
+    let teams = JSON.parse(localStorage.getItem("notas")) || [];
+    let totalEstudiantes = teams.length; // Obtén el total de estudiantes
+    let pendientes = 0; // Inicializamos el contador de pendientes
+    teams.forEach(team => {
+        if (team.total === "0") { // Verificamos si el promedio está vacío
+            pendientes++; // Incrementamos el contador si el promedio está vacío
+        }
+    });
+    let promedioPendientes = (pendientes / totalEstudiantes) * 100; // Calcula el porcentaje de estudiantes con promedio pendiente
+    document.getElementById("total-pendientes").innerText = promedioPendientes.toFixed(2) + "%"; // Muestra el porcentaje de estudiantes con promedio pendiente en la tarjeta
+}
+
+// Llama a totalpendientes después de cargar los datos o realizar alguna acción que actualice las notas
+totalpendientes();
+
+
+
+
+
+
+
+
+
+
+        $(document).ready(function () {
+            $('#myTable').DataTable({
+                "paging": true, // Habilita la paginación
+                "pageLength": 5, // Establece la cantidad de filas por página
+                "lengthChange": false, // Oculta el control para cambiar la cantidad de filas por página
+                "searching": true, // Habilita la búsqueda
+                "ordering": true, // Habilita la ordenación
+                "info": true, // Muestra información sobre la cantidad de filas
+                "autoWidth": false, // Habilita el ajuste automático del ancho de las columnas
+                "responsive": true, // Habilita el diseño responsivo
+           "scrollX": true, // Habilita el desplazamiento horizontal
+           "scrollY": "50vh", // Establece la altura máxima de la tabla
+              "scrollCollapse": true, // Habilita el colapso del desplazamiento
+                "color": "red",
+
+
+            
+                "language": {
+                    "lengthMenu": "Mostrar _MENU_ registros por página",
+                    "zeroRecords": "No se encontraron registros",
+                    "info": "Mostrando la página _PAGE_ de _PAGES_",
+                    "infoEmpty": "No hay registros disponibles",
+                    "infoFiltered": "(filtrado de _MAX_ registros totales)",
+                    "search": "Buscar:",
+                    "paginate": {
+                        "previous": "Anterior",
+                        "next": "Siguiente",
+                      
+
+
+
+
+
+                    }
+                        
+
+
+                }
+
+
+
+            });
+        });
+
+
+        const eliminar = (index) => {
+            let teams = JSON.parse(localStorage.getItem("notas")) || [];
+            teams.splice(index, 1);
+            localStorage.setItem("notas", JSON.stringify(teams));
+            cargar();
+        }
+
+        const Editar = () => {
+            var index = document.getElementById("indexE").value;
+            let name = document.getElementById("name1").value;
+            let seccion = document.getElementById("seccion1").value;
+            let fecha = document.getElementById("fecha1").value;
+            let mujeres = document.getElementById("mujeres1").value;
+            let varones = document.getElementById("varones1").value;
+            let total = document.getElementById("total1").value;
+
+            let teams = JSON.parse(localStorage.getItem("notas"));
+            teams[index] = { name, seccion, fecha, mujeres, varones, total };
+            localStorage.setItem("notas", JSON.stringify(teams));
+            closeModal2();
+            cargar();
+
+        }
+        const editar1 = (name, seccion, fecha, mujeres, varones, total, index) => {
+            document.getElementById("name1").value = name;
+            document.getElementById("seccion1").value = seccion;
+            document.getElementById("fecha1").value = fecha;
+            document.getElementById("mujeres1").value = mujeres;
+            document.getElementById("varones1").value = varones;
+            document.getElementById("total1").value = total
+
+            document.getElementById("indexE").value = index;
+            openModal2();
+        }
+        cargar();
+
+
+        const logout = () => {
+            localStorage.removeItem("user");
+            window.location.href = "index.html";
+        }
+
+
+
+
+
+
+
+
+
+        const toggleThemeBtn = document.getElementById("toggle-theme-btn");
+        const body = document.body;
+
+        toggleThemeBtn.addEventListener("click", function () {
+            body.classList.toggle("dark-mode");
+        });
+
+        const darkMode = localStorage.getItem("dark-mode");
+        if (darkMode) {
+            body.classList.add("dark-mode");
+        } else {
+            body.classList.remove("dark-mode");
+        }
+
+
+        const calendario = () => {
+            window.location.href = "calendario.html";
+        }
+
+
+
+        
+
+
+
+        const reportes = () => {
+    let teams = JSON.parse(localStorage.getItem("asistencias")) || [];
+    let tablaReportes = document.getElementById("tablaReportes");
+
+    teams.forEach(team => {
+        let row = tablaReportes.insertRow();
+        row.innerHTML = `
+            <td>${team.name}</td>
+            <td>${team.seccion}</td>
+            <td>${team.fecha}</td>
+            <td>${team.mujeres}</td>
+            <td>${team.varones}</td>
+            <td>${team.total}</td>
+        `;
+    });
+
+    localStorage.setItem("asistencias", JSON.stringify([])); // Vaciar la tabla de asistencias
+
+    window.location.href = "reporte.html"; // Redirigir a la página de reporte
+}
+// Función para comprobar si ha pasado un minuto y eliminar los datos de la tarjeta en ese caso
+function comprobarEliminarDatosTarjeta() {
+    // Obtener la hora de creación de los datos de la tarjeta del almacenamiento local
+    var horaCreacionDatosTarjeta = localStorage.getItem('horaCreacionDatosTarjeta');
+
+    // Si ha pasado un minuto desde la creación de los datos de la tarjeta
+    if (Date.now() - horaCreacionDatosTarjeta >= 1 * 60 * 1000) {
+        // Eliminar los datos de la tarjeta del almacenamiento local
+        localStorage.removeItem('horaCreacionDatosTarjeta');
+        localStorage.removeItem('totalMujeres');
+        localStorage.removeItem('totalVarones');
+        // Aquí deberías incluir el código para actualizar la tarjeta en el DOM o realizar cualquier otra acción necesaria
+        cargar(); // Actualizar la tarjeta después de eliminar los datos
+    }
+}
+
+// Llamar a la función para comprobar y eliminar los datos de la tarjeta cada vez que se carga la página
+window.onload = function() {
+    comprobarEliminarDatosTarjeta(); // Comprobar al cargar la página
+    // Ejecutar la función cada minuto
+    setInterval(comprobarEliminarDatosTarjeta, 60 * 1000); // 60 segundos * 1000 milisegundos
+};
+
+
+
+
+    </script>
+</body>
+
+</html>
